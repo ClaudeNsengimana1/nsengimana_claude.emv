@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
 
-    const[StudentName,setStudentName]=useState("");
-    const[StudentEmail,setStudentEmail]=useState("");
+    const[username,setUsername]=useState("");
+    const[userEmail,setUserEmail]=useState("");
     const[password,setPassword]=useState("");
 
   const handleSubmit = async(e) => {
     e.preventDefault();
 
-     await axios.post(`http://localhost:3000/insert`, {StudentName,StudentEmail,password});
-    setStudentName("");
-    setStudentEmail("");
+     await axios.post(`http://localhost:3000/insert`, {username,userEmail,password});
+    setUsername("");
+    setUserEmail("");
     setPassword("");
     
   }
@@ -28,17 +28,17 @@ return(
         <input 
         type="text"
          placeholder="enter student name"
-         value={StudentName}
+         value={username}
           required
-        onChange={(e)=>setStudentName(e.target.value)}
+        onChange={(e)=>setUsername(e.target.value)}
          /><br/><br/>
 <input 
 type="email"
 placeholder="ente student email"
-value={StudentEmail}
+value={userEmail}
 required
 
-onChange={(e)=>setStudentEmail(e.target.value)}
+onChange={(e)=>setUserEmail(e.target.value)}
  /><br/><br/>
 
   <input 

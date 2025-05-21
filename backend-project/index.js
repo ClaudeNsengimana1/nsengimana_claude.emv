@@ -32,7 +32,7 @@ const db=mysql.createConnection({
     host:'localhost',
     user:'root',
     password:'',
-    database:'register_student'
+    database:'CWSMS'
 });
 db.connect((err)=>{
     if(err){
@@ -52,9 +52,9 @@ app.get('/h',(req,res)=>{
 
 
 app.post('/insert',(req,res)=>{
-    const {StudentName,StudentEmail,password}=req.body;
-    const sql='INSERT INTO students(StudentName,StudentEmail,password) VALUES (?,?,?)';
-    db.query(sql,[StudentName,StudentEmail,password],(err,result)=>{
+    const {username,userEmail,password}=req.body;
+    const sql='INSERT INTO users(username,userEmail,password) VALUES (?,?,?)';
+    db.query(sql,[username,userEmail,password],(err,result)=>{
         if(err){
             console.log('Error inserting data:', err);
             res.status(500).send('Error inserting data');
@@ -73,7 +73,7 @@ app.post('/insert',(req,res)=>{
 
 app.get('/select',(req,res)=>{
 
-    const sql='SELECT * FROM student_record';
+    const sql='SELECT * FROM  package ';
     db.query(sql,(err,result)=>{
         if(err){
             console.log('Error selecting data:', err);
@@ -89,11 +89,11 @@ app.get('/select',(req,res)=>{
 }
 );
 //------update data in student_record table
- app.put('/update/:stId',(req,res)=>{
-    const stId=req.params.stId;
+ app.put('/update/:PackageNumber',(req,res)=>{
+    const PackageNumber=req.params.PackageNumber;
 
-    const sql='UPDATE student_record SET stName=?,stEmail=?,stGitHub_account=?,stAdress=? WHERE stId=?';
-    db.query(sql,[req.body.stName,req.body.stEmail,req.body.stGitHub_account,req.body.stAdress,stId],(err,result)=>{
+    const sql='UPDATE package SET PackageName=?,PackageDescription=?,PackagePrice=? WHERE PackageNumber=?';
+    db.query(sql,[req.body.PackageName,req.body.PackageDescription,req.body.PackagePrice,PackageNumber],(err,result)=>{
         if(err){
             console.log('error to edit',err);
             res.status(500).send('Error updating data');
@@ -113,9 +113,9 @@ app.get('/select',(req,res)=>{
 // ---------add new record in student_record table
 
 app.post('/add',(req,res)=>{
-    const {stName,stEmail,stGitHub_account,stAdress}=req.body;
-    const sql='INSERT INTO student_record(stName,stEmail,stGitHub_account,stAdress) VALUES (?,?,?,?)';
-    db.query(sql,[stName,stEmail,stGitHub_account,stAdress],(err,result)=>{
+    const {PackageName,PackageDescription,PackagePrice}=req.body;
+    const sql='INSERT INTO package (PackageName,PackageDescription,PackagePrice) VALUES (?,?,?)';
+    db.query(sql,[PackageName,PackageDescription,PackagePrice],(err,result)=>{
         if(err){
             console.log('Error inserting data:', err);
             res.status(500).send('Error inserting data');
@@ -152,10 +152,10 @@ app.delete('/delete/:stId',(req,res)=>{
 
 
 app.post("/login", (req, res) => {
-    const { StudentEmail, password } = req.body;
+    const { userEmail, password } = req.body;
 
-    const query = "SELECT * FROM students WHERE StudentEmail = ? AND password = ?";
-    db.query(query, [StudentEmail, password], (err, data) => {
+    const query = "SELECT * FROM users WHERE userEmail = ? AND password = ?";
+    db.query(query, [userEmail, password], (err, data) => {
         if (err) return res.json({ error: "Database error" });
         if (data.length > 0) {
             req.session.user = data[0];

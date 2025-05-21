@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const [StudentEmail, setStudentEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:3000/login", {
-        StudentEmail,
+        userEmail,
         password,
       });
 
@@ -38,8 +38,8 @@ const Login = () => {
         <input
           type="email"
           placeholder="Enter email"
-          value={StudentEmail}
-          onChange={(e) => setStudentEmail(e.target.value)}
+          value={userEmail}
+          onChange={(e) => setUserEmail(e.target.value)}
           required
         /><br/><br/>
         <input

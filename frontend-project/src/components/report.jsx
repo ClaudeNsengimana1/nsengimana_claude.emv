@@ -48,28 +48,26 @@ const Report = () => {
         />
       ) : (
         <>
-          <button onClick={() => setAddStudents(true)}>Add students</button>
+          <button onClick={() => setAddStudents(true)}>Add Package</button>
           <table border="1">
             <thead>
               <tr>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>Student Email</th>
-                <th>Student GitHub Account</th>
-                <th>Student Address</th>
-                <th>Action</th>
+                <th>PackageName</th>
+                <th>PackageDescription</th>
+                <th>PackagePrice</th>
+          
+               <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
-                <tr key={item.stId}>
-                  <td>{item.stId}</td>
-                  <td>{item.stName}</td>
-                  <td>{item.stEmail}</td>
-                  <td>{item.stGitHub_account}</td>
-                  <td>{item.stAdress}</td>
+                <tr key={item.PackageNumber}>
+                 <td>{item.PackageName}</td>
+                  <td>{item.PackageDescription}</td>
+                  <td>{item.PackagePrice}</td>
+    
                   <td>
-                    <button onClick={() => handleDelete(item.stId)}>DELETE</button>
+                    <button onClick={() => handleDelete(item.PackageNumber)}>DELETE</button>
                     <button onClick={() => handleEdit(item)}>MODIFY</button>
                   </td>
                 </tr>
